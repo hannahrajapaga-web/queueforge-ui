@@ -601,3 +601,144 @@ section { min-width: 0; }
   .mosaic-metrics span { font-size: 9px; }
   .mosaic-tagline > strong { font-size: 15px; }
 }
+
+/* QueueForge — custom warning and confirmation dialogs */
+
+.dialog-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.62);
+  backdrop-filter: blur(5px);
+  animation: dialog-fade-in .18s ease;
+}
+
+.queue-dialog {
+  width: min(100%, 410px);
+  padding: 28px;
+  border: 1px solid var(--border);
+  border-radius: 15px;
+  background: var(--surface);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, .3);
+  text-align: center;
+  animation: dialog-slide-in .2s ease;
+}
+
+.dialog-icon {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  margin: 0 auto 17px;
+  border-radius: 13px;
+  font: 800 22px Manrope, sans-serif;
+}
+
+.dialog-icon.warning {
+  color: #e9a64b;
+  background: rgba(233, 166, 75, .13);
+}
+
+.dialog-icon.confirm {
+  color: #e36d7c;
+  background: rgba(227, 109, 124, .13);
+}
+
+.queue-dialog h2 {
+  margin: 0;
+  color: var(--text);
+  font: 700 18px Manrope, sans-serif;
+  letter-spacing: -.4px;
+}
+
+.queue-dialog p {
+  margin: 11px 0 24px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.7;
+  overflow-wrap: anywhere;
+}
+
+.dialog-actions {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.dialog-actions button {
+  min-width: 105px;
+  min-height: 39px;
+}
+
+.dialog-delete-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 16px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  color: white;
+  background: #d65365;
+  font-size: 11px;
+  font-weight: 700;
+  transition: filter .18s, transform .18s;
+}
+
+.dialog-delete-button:hover {
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+}
+
+.delete-link {
+  padding: 0;
+  border: 0;
+  color: #dc5555;
+  background: none;
+  font: inherit;
+  cursor: pointer;
+}
+
+.delete-link:hover {
+  color: #ef7373;
+}
+
+.delete-link:disabled {
+  cursor: not-allowed;
+  opacity: .5;
+}
+
+@keyframes dialog-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes dialog-slide-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (max-width: 480px) {
+  .queue-dialog {
+    padding: 23px 19px;
+  }
+
+  .dialog-actions {
+    flex-wrap: wrap;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dialog-backdrop,
+  .queue-dialog {
+    animation: none;
+  }
+}
